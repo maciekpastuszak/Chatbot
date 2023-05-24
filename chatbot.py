@@ -4,18 +4,14 @@ from dotenv import dotenv_values
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
 
+messages = []
 while True:
     try:
         user_input = input("You: ")
-        res = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {
-                    "role": "user",
-                    "content": user_input,
-                }
-            ],
-        )
+        messages.append({"role": "user", "content": user_input})
+        res = openai.ChatCompletion.create(model="gpt-4", messages=messages)
+        print(res["choices"][0]["message"])
+
     except KeyboardInterrupt:
         print("Exiting....")
         break
