@@ -7,6 +7,16 @@ openai.api_key = config["OPENAI_API_KEY"]
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Simple command line chatbot with GPT-4"
+    )
+
+    parser.add_argument(
+        "--pesonality", type=str, help="A brief summary of the chatbot's personality"
+    )
+
+    parser.parse_args()
+
     messages = []
     while True:
         try:
