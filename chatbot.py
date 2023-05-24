@@ -10,7 +10,10 @@ while True:
         user_input = input("You: ")
         messages.append({"role": "user", "content": user_input})
         res = openai.ChatCompletion.create(model="gpt-4", messages=messages)
-        print(res["choices"][0]["message"])
+
+        messages.appen(res["choices"][0]["message"].to_dict())
+        print(res["choices"][0]["message"]["content"])
+        print("ALL MESSAGES", messages)
 
     except KeyboardInterrupt:
         print("Exiting....")
