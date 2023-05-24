@@ -15,13 +15,16 @@ def main():
         "--pesonality",
         type=str,
         help="A brief summary of the chatbot's personality",
-        default="friendly and helpful chatbot",
+        default="friendly and helpful",
     )
 
     args = parser.parse_args()
-    print(args.personality)
+    args.personality
 
-    messages = []
+    initial_prompt = (
+        f"You are a conversational chatbot. Your personality is: {args.personality}"
+    )
+    messages = [{"role": "system", "content": initial_prompt}]
     while True:
         try:
             user_input = input("You: ")
