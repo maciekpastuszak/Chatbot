@@ -12,10 +12,14 @@ def main():
     )
 
     parser.add_argument(
-        "--pesonality", type=str, help="A brief summary of the chatbot's personality"
+        "--pesonality",
+        type=str,
+        help="A brief summary of the chatbot's personality",
+        default="friendly and helpful chatbot",
     )
 
-    parser.parse_args()
+    args = parser.parse_args()
+    print(args.personality)
 
     messages = []
     while True:
