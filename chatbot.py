@@ -30,7 +30,7 @@ def main():
     )
 
     parser.add_argument(
-        "--pesonality",
+        "--personality",
         type=str,
         help="A brief summary of the chatbot's personality",
         default="friendly and helpful",
@@ -42,18 +42,19 @@ def main():
         f"You are a conversational chatbot. Your personality is: {args.personality}"
     )
     messages = [{"role": "system", "content": initial_prompt}]
+
     while True:
         try:
             user_input = input(bold(blue("You: ")))
             messages.append({"role": "user", "content": user_input})
-            res = openai.ChatCompletion.create(model="gpt-4", messages=messages)
 
-            messages.appen(res["choices"][0]["message"].to_dict())
+            res = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+
+            messages.append(res["choices"][0]["message"].to_dict())
             print(bold(red("Assistant: ")), res["choices"][0]["message"]["content"])
-            print("ALL MESSAGES", messages)
 
         except KeyboardInterrupt:
-            print("Exiting....")
+            print("Exiting...")
             break
 
     print(res)
